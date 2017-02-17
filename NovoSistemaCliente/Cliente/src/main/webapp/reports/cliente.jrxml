@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-01-12T17:22:40 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cliente" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d34db767-e0c5-47e2-9c91-127edae70a7d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="Y2xpZW50ZS5jbGllbnRlIEFTICwxMzYsMzYsYjU0MzM1OWQtZjkzMC00MWFlLWE4NDAtZTQ2NjY4&#xA;NmQwZTE3Ow=="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sistema Clientes Secrett Adapter"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT cliente.cliente.`dtAniversario`,
+	cliente.cliente.`dtCadastro`,
+	cliente.cliente.email,
+	cliente.cliente.nome,
+	cliente.cliente.rg,
+	cliente.cliente.sobrenome,
+	cliente.cliente.valor,
+	cliente.cliente.telefone,
+	cliente.cliente.balada_codigo
+FROM cliente.cliente
+ORDER BY cliente.cliente.nome ASC]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="sobrenome" class="java.lang.String"/>
+	<field name="dtAniversario" class="java.sql.Timestamp"/>
+	<field name="dtCadastro" class="java.sql.Timestamp"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="telefone" class="java.lang.String"/>
+	<field name="rg" class="java.lang.String"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<field name="balada_codigo" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="88" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="10" width="400" height="30" uuid="b6706778-f367-43de-9ca5-456253d6c7dd"/>
+				<textElement textAlignment="Center">
+					<font fontName=" Verdan" size="18"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE CLIENTES]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="189" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="30" uuid="1e7dd607-6e41-45fe-b653-edf5f3fccef2"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="100" height="30" uuid="07f35d32-8d41-4a13-b37b-9566524425f5"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[sobrenome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="100" height="30" uuid="94ca78a4-4090-4416-a67e-d1d6a4a0f228"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="99" height="30" uuid="ef28ba3c-8e57-4508-bf04-246fbe78802b"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="80" height="30" uuid="72ee88c8-e42b-43a6-8f61-8ac991cb2085"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[dtAniversario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="68" height="30" uuid="a9a36320-6670-4d86-b837-7c50ecde67b3"/>
+				<text><![CDATA[dtCadastro]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="130" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="80" height="30" uuid="1ee7af11-9a14-4e43-879e-4d79b4680c85"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="100" height="30" uuid="9a178207-11ab-4cce-aef5-560c8b274896"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sobrenome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="100" height="30" uuid="ff6eb72f-518c-4a77-be47-450ad9118996"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="98" height="30" uuid="fa4933c7-68cc-4693-81e6-77bb163f2e73"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="100" height="30" uuid="7e3c1d79-c677-4317-b482-ee6bd6d96ae7"/>
+				<textFieldExpression><![CDATA[$F{dtAniversario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="100" height="30" uuid="2d3a6ffb-dc1e-4cb6-a2e2-c04693b47c21"/>
+				<textFieldExpression><![CDATA[$F{dtCadastro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="100" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="13" y="80" width="535" height="20" uuid="f44ddc3d-cc6c-4920-b669-ff9b1ed9be1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Justified">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[Rua  Quata 1001 - Vila Olimpia ]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="9" y="30" width="536" height="20" uuid="9a5daff6-cf29-49e1-9e8b-9102c647b245"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Desenvolvido por Bruno Santos Silva @All ights reserved]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

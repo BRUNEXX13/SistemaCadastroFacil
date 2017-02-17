@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/templates/template.xhtml">
+
+
+	<ui:define name="conteudo">
+
+		<h:form id="formListagem">
+			<p:panel header="Baladas - Listagem">
+				<p:dataTable id="tabelaListagem"
+					emptyMessage="Nenhum registro encontrado." paginator="true"
+					value="#{baladaBean.baladas}" var="balada" rows="10" reflow="true">
+					<f:facet name="header">
+						<p:commandButton value="Novo"
+							actionListener="#{baladaBean.novo}"
+							update=":formBalada:pnBalada" oncomplete="PF('dialogo').show();">
+							<f:actionListener
+								type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						</p:commandButton>
+
+
+					</f:facet>
+
+					<p:column headerText="Código" sortBy="#{balada.codigo}"
+						filterBy="#{balada.codigo}">
+						<h:outputText value="#{balada.codigo}" />
+					</p:column>
+
+					<p:column headerText="Nome" sortBy="#{balada.descricao}"
+						filterBy="#{balada.descricao}">
+						<h:outputText value="#{balada.descricao}" />
+					</p:column>
+
+
+					<p:column headerText="OPÇÕES">
+
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{baladaBean.excluir}"
+							update=":mensagem :formListagem:tabelaListagem">
+							<p:confirm header="Confirmação"
+								message="Deseja excluir a Balada?" icon="ui-icon-alert" />
+							<f:attribute name="baladaSelecionado" value="#{balada}" />
+						</p:commandButton>
+
+						<p:commandButton icon="ui-icon-pencil"
+							actionListener="#{baladaBean.editar}"
+							update=":formBalada:pnBalada" oncomplete="PF('dialogo').show();">
+							<f:attribute name="baladaSelecionado" value="#{balada}" />
+						</p:commandButton>
+
+
+
+
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+
+
+
+
+
+
+
+			</p:panel>
+		</h:form>
+
+
+		<p:dialog header="Baladas - Editar" widgetVar="dialogo"
+			draggable="false" resizable="false" global="true" closable="false">
+			<h:form id="formBalada">
+				<h:panelGrid columns="2" id="pnBalada">
+
+
+
+
+					<p:outputLabel value="Descrição" />
+					<p:inputText maxlength="50" size="30"
+						value="#{baladaBean.balada.descricao}" required="true"
+						requiredMessage="O campo Descrição é obrigatorio" />
+
+
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{baladaBean.salvar}"
+						update=":mensagem :formBalada:pnBalada :formListagem:tabelaListagem" />
+
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+
+					<p:growl id="messages" showDetail="true" />
+
+
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>
+
+
+
+
+
+
+

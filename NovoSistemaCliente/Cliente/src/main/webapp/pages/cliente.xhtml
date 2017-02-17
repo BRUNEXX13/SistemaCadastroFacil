@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+template="/templates/template.xhtml">
+
+
+<ui:define name="conteudo">
+	<h:form id="formCliL"  enctype="multipart/form-data">
+
+
+		<p:panel responsive="true" header="Clientes - Listagem">
+
+			<p:dataTable  id="tabelaCliL"
+				emptyMessage="Nenhum registro encontrado." paginator="true"
+				value="#{clienteBean.clientes}" var="cliente" rows="20" reflow="true">
+				<f:facet name="header">
+					<p:commandButton value="Novo" actionListener="#{clienteBean.novo}"
+						update=":formCliente:pnCliente" oncomplete="PF('dialogo').show();">
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+					
+					<p:commandButton value="Imprimir" actionListener="#{clienteBean.imprimir}">
+					</p:commandButton>
+					
+				</f:facet>
+
+			
+
+				<p:column headerText="Código" sortBy="#{cliente.codigo}"
+					filterBy="#{cliente.codigo}" visible="false">
+					<h:outputText value="#{cliente.codigo}" />
+				</p:column>
+				
+				
+
+
+				<p:column headerText="Nome" sortBy="#{cliente.nome}"
+					filterBy="#{cliente.nome}">
+					<h:outputText value="#{cliente.nome}" />
+				</p:column>
+
+				<p:column headerText="Sobrenome" sortBy="#{cliente.sobrenome}"
+					filterBy="#{cliente.sobrenome}">
+					<h:outputText value="#{cliente.sobrenome}" />
+				</p:column>
+
+
+
+
+
+				<p:column headerText="RG" sortBy="#{cliente.rg}"
+					filterBy="#{cliente.rg}" visible="false">
+					<h:outputText value="#{cliente.rg}" />
+				</p:column>
+
+
+
+
+
+
+				<p:column headerText="Dt/Nasc" sortBy="#{cliente.dtAniversario}"
+					filterBy="#{cliente.dtAniversario}">
+					<h:outputText value="#{cliente.dtAniversario}">
+						<f:convertDateTime locale="pt_BR" />
+					</h:outputText>
+				</p:column>
+
+
+
+
+				<p:column headerText="Telefone" sortBy="#{cliente.telefone}"
+					filterBy="#{cliente.telefone}">
+					<h:outputText value="#{cliente.telefone}" />
+				</p:column>
+
+
+
+				<p:column headerText="Email" sortBy="#{cliente.email}"
+					filterBy="#{cliente.email}">
+					<h:outputText value="#{cliente.email}" />
+				</p:column>
+
+				<p:column headerText="Cadastro" sortBy="#{cliente.dtCadastro}"
+					filterBy="#{cliente.dtCadastro}">
+					<h:outputText value="#{cliente.dtCadastro}">
+						<f:convertDateTime locale="pt_BR" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Valor" sortBy="#{cliente.valor}"
+					filterBy="#{cliente.valor}">
+					<h:outputText value="#{cliente.valor}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Balada" sortBy="#{cliente.balada.descricao}"
+					filterBy="#{cliente.balada.descricao}" visible="false">
+					<h:outputText value="#{cliente.balada.descricao}" />
+				</p:column>
+
+
+
+
+				<p:column headerText="OPÇÕES">
+
+				
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{clienteBean.editar}"
+						update=":formCliente:pnCliente" oncomplete="PF('dialogo').show();">
+						<f:attribute name="clienteSelecionado" value="#{cliente}" />
+
+					</p:commandButton>
+					
+					
+						<p:commandButton icon="ui-icon-trash"
+						actionListener="#{clienteBean.excluir}"
+						update=":mensagem :formCliL:tabelaCliL">
+						<p:confirm header="Confirmação"
+							message="Deseja excluir o Cliente?" icon="ui-icon-alert" />
+						<f:attribute name="clienteSelecionado" value="#{cliente}" />
+					</p:commandButton>
+
+
+
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+
+
+
+
+
+
+		</p:panel>
+	</h:form>
+
+
+
+
+	<p:dialog header="Clientes - Editar" widgetVar="dialogo"
+		draggable="false" resizable="false" global="true" closable="false">
+		<h:form id="formCliente">
+			<h:panelGrid columns="2" id="pnCliente">
+
+				<p:outputLabel value="Nome:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{clienteBean.cliente.nome}" required="true"
+					requiredMessage="Campo Nome Obrigatorio" />
+
+
+
+
+				<p:outputLabel value="SobreNome:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{clienteBean.cliente.sobrenome}" required="true"
+					requiredMessage="Campo Sobrenome Obrigatorio" />
+
+
+
+				<p:outputLabel for="rg" value="RG:" />
+				<p:inputMask id="rg" mask="99.999.999-9" size="10"
+					value="#{clienteBean.cliente.rg}" required="true"
+					requiredMessage="O campo 'RG' é obrigatório" />
+					
+					
+					
+
+
+				<p:outputLabel value="Dt/Nasc" />
+				<p:calendar pattern="dd/MM/yyyy"
+					value="#{clienteBean.cliente.dtAniversario}" required="true"
+					requiredMessage="Campo DATA Obrigatorio" />
+
+
+
+
+
+				<p:outputLabel value="Telefone" />
+				<p:inputMask id="telefone" mask="(99)99999-9999" size="14"
+					value="#{clienteBean.cliente.telefone}" required="true"
+					requiredMessage="O campo 'Telefone' é obrigatório" />
+
+
+
+				<p:outputLabel for="email" value="Email:" />
+				<p:inputText id="email" maxlength="100" size="50"
+					value="#{clienteBean.cliente.email}" required="true"
+					requiredMessage="O campo 'Email' é obrigatório" />
+
+
+
+				<p:outputLabel value="Data Cadastro" />
+				<p:calendar pattern="dd/MM/yyyy"
+					value="#{clienteBean.cliente.dtCadastro}" required="true"
+					requiredMessage="Campo DATA Obrigatorio" />
+
+				<p:outputLabel value="Valor" />
+				<p:inputText maxlength="50" size="30"
+					value="#{clienteBean.cliente.valor}" required="true"
+					requiredMessage="Campo VALOR Obrigatorio"
+					converterMessage="Informe um Valor válido para o 'Valor'"
+					validatorMessage="Informe um valor entre 0,01 e 999,99 para o campo 'Valor' ">
+					<f:validateDoubleRange minimum="0.01" maximum="999.99" />
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</p:inputText>
+
+
+				<p:outputLabel for="balada" value="Balada:" />
+				<p:selectOneMenu id="balada" filter="true"
+					value="#{clienteBean.cliente.balada}"
+					converter="omnifaces.SelectItemsConverter" required="true"
+					requiredMessage="O campo 'Balada' é obrigatório">
+
+
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Selecione uma Balada" />
+
+					<f:selectItems value="#{clienteBean.baladas}" var="balada"
+						itemValue="#{balada}" itemLabel="#{balada.descricao}" />
+				</p:selectOneMenu>
+			</h:panelGrid>
+
+
+			
+
+
+
+
+
+			<h:panelGrid columns="2">
+
+				<p:commandButton value="Salvar"
+					actionListener="#{clienteBean.salvar()}"
+					update=":mensagem :formCliente:pnCliente :formCliL:tabelaCliL" />
+
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
+				
+				
+			
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	</ui:define>
+	</ui:composition>
